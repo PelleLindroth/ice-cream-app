@@ -3,13 +3,15 @@ const express = require("express")
 const logger = require("./middleware/Logger.js")
 const errorHandler = require("./errors/errorHandler.js")
 const flavourRoutes = require("./routes/Flavours.js")
+const JsonErrorHandler = require('./errors/jsonErrorHandler')
 
 const app = express()
 const PORT = process.env.PORT || 5000
 
-
 app.use(express.json())
 app.use(logger)
+app.use(JsonErrorHandler)
+
 app.use(flavourRoutes)
 
 app.use(errorHandler)
